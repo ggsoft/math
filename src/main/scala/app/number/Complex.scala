@@ -22,7 +22,11 @@ case class Complex[A](x: A, y: A)(implicit f: A => Number[A]) {
     else if ((x == x.zero) && (y == -y.one)) "-i"
     else if (y == y.zero) x.toString
     else if (x == x.zero) y.toString + "*i"
-    else x.toString + " " + (if (y < y.zero) "-" else "+") + " " + y.abs.toString + "*i"
+    else {
+      val a = x.toString
+      val b = y.abs.toString
+      a + " " + (if (y < y.zero) "-" else "+") + " " + (if (b == "1") "i" else  b + "*i")
+    }
   }
 }
 
