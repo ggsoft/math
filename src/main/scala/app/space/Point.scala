@@ -7,7 +7,10 @@ abstract class Space[+A] {
 }
 
 case class Point[A](c: A*) extends Space[A] { // point of n-dimensional space
-  override val n: Int = c.size
+  override val n: Int = {
+    if (c.size == 0) throw new Exception("Empty space not allowed")
+    c.size
+  }
   def +(p: Point[A])(implicit f: A => Num[A]) = Point((c zip p.c).map(x => x._1 + x._2):_*)
   def -(p: Point[A])(implicit f: A => Num[A]) = Point((c zip p.c).map(x => x._1 - x._2):_*)
   def *(k: A)(implicit f: A => Num[A]) = Point(c.map(_ * k):_*)

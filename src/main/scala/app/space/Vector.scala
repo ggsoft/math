@@ -2,12 +2,12 @@ package app.space
 
 import app.number.{Number => Num}
 
-class Vector[A](override val c: A*) extends Point[A](c:_*) {
+class Vector[A](override val c: A*)(implicit f: A => Num[A]) extends Point[A](c:_*) {
   def **(v: Vector[A])(implicit f: A => Num[A]) = (c zip v.c).map(x => x._1 * x._2).reduceLeft(_ + _) // scalar product
   def ||(v: Vector[A])(implicit f: A => Num[A]) = (c zip v.c).forall(x => x._1 == x._2) // is parallel
   def |-(v: Vector[A])(implicit f: A => Num[A]) =  (this ** v) == 0 // is orthogonal
-  def mod(implicit f: A => Num[A]) = (this ** this).sqrt
-  def cos(implicit f: A => Num[A]) = this/mod // direction cosines
+  val mod: A = (this ** this).sqrt // length
+  val cos: Option[Point[A]] = if (mod > c(0).zero) Some(this/mod) else None // directional cosines
   def cos(v: Vector[A])(implicit f: A => Num[A]) = (this ** v)/(this.mod*v.mod) // cosines of angle with another vector
 }
 
