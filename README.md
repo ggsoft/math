@@ -1,6 +1,6 @@
 ## Synopsis
 
-Linear algebra implementation (n dimensional points, vectors, hyperplanes, complex numbers, rational fractions).
+Linear algebra implementation (n-dimensional points, vectors, hyperplanes, complex numbers, rational fractions).
   
 ## Running
 
