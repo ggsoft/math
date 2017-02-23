@@ -9,7 +9,7 @@ class Frac(val a: BigInt, val b: BigInt) {
   def -(f: Frac) = Frac(a*f.b-b*f.a, b*f.b).reduce
   def *(f: Frac) = Frac(a*f.a, b*f.b).reduce
   def /(f: Frac) = Frac(a*f.b, b*f.a).reduce
-  def ^(n: Int) = Frac(a.pow(n), b.pow(n)).reduce
+  def pow(n: Int) = Frac(a.pow(n), b.pow(n)).reduce
   def ==(f: Frac) = a*f.b == b*f.a
   def >(f: Frac) = a*f.b > b*f.a
   def >=(f: Frac) = a*f.b >= b*f.a
