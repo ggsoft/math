@@ -41,4 +41,10 @@ class Frac(val a: BigInt, val b: BigInt) {
 object Frac {
   def apply(a: BigInt, b: BigInt) =  new Frac(a,b)
   def unapply(f: Frac) = Some((f.a,f.b))
+  val zero = Frac(0,1)
+  val one = Frac(1,1)
+  import scala.language.implicitConversions
+  implicit def fromBigInt(a: BigInt) = Frac(a,1)
+  implicit def fromInt(a: Int) = Frac(a,1)
+  implicit def fromLong(a: Long) = Frac(a,1)
 }
