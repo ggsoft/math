@@ -1,5 +1,6 @@
 package app
 
+import app.matrix._
 import app.number._
 import app.space._
 
@@ -42,6 +43,11 @@ object Main {
     println("-"*93)
     val f = Frac(BigInt("100250657902956342367209564"), BigInt("152232480519304075446503412"))
     println("Fraction: "+f+" = "+f.reduce)
+    println(div)
+    val a: Seq[Seq[Double]] = Seq(Seq(4,3,-4,2,2), Seq(2,-1,-3,-4,2), Seq(3,1,1,2,-1), Seq(1,2,3,4,-1), Seq(-1,1,-1,-2,3))
+    val qm = QMatrix(a)
+    println(qm+"\n")
+    println("Determinant = "+det(qm))
     println(div)
   }
 }
