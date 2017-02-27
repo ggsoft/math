@@ -15,7 +15,6 @@ class Vector[A](override val c: A*)(implicit f: A => Num[A]) extends Point[A](c:
     if (s.size != n-2) throw new Exception(s"Seq of ${n-2} vectors expected")
     val a = Seq(this.c,this.c) ++ s.map(_.c)
     val qm = QMatrix(a)
-    val one = a(0)(0).one
     val c = a.head.indices.map(j => qm.sign(j)*det(qm.minor(0,j)))
     Vector(c:_*)
   }
