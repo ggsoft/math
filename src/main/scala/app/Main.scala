@@ -49,5 +49,19 @@ object Main {
     println(qm+"\n")
     println("Determinant = "+det(qm))
     println(div)
+    val v2 = Vector(6.0,7,10)
+    val v3 = Vector(8.0,5,9)
+    val v4 = Vector(6.0,7,10,5)
+    val v5 = Vector(8.0,5,9,7)
+    val v6 = Vector(1.0,1,1,1)
+    println("Generalization of vector product:")
+    println(v2+" x "+v3+s" = "+(v2 x v3))
+    println(v3+" x "+v2+s" = "+(v3 x v2))
+    println
+    println("v1 = "+v4)
+    println("v2 = "+v5)
+    println("v3 = "+v6)
+    println("v1 x (v2,v3) = "+(v4 x (v5,v6)))
+    println(div)
   }
 }
