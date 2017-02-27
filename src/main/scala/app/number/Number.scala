@@ -24,10 +24,10 @@ object Number {
     override val a = x
     override val zero = 0.0
     override val one = 1.0
-    override def +(b: Double) = a+b
-    override def -(b: Double) = a-b
-    override def *(b: Double) = a*b
-    override def /(b: Double) = a/b
+    override def +(b: Double) = a + b
+    override def -(b: Double) = a - b
+    override def *(b: Double) = a * b
+    override def /(b: Double) = a / b
     override def < (b: Double) = a < b
     override def > (b: Double) = a > b
     override def <= (b: Double) = a <= b
@@ -42,10 +42,10 @@ object Number {
     override val a = x
     override val zero = BigDecimal(0)
     override val one = BigDecimal(1)
-    override def +(b: BigDecimal) = a+b
-    override def -(b: BigDecimal) = a-b
-    override def *(b: BigDecimal) = a*b
-    override def /(b: BigDecimal) = a/b
+    override def +(b: BigDecimal) = a + b
+    override def -(b: BigDecimal) = a - b
+    override def *(b: BigDecimal) = a * b
+    override def /(b: BigDecimal) = a / b
     def < (b: BigDecimal) = a < b
     def > (b: BigDecimal) = a > b
     def <= (b: BigDecimal) = a <= b
