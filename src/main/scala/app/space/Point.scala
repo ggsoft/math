@@ -14,6 +14,6 @@ case class Point[A](c: A*) extends Space[A] { // point of n-dimensional space
   def *(k: A)(implicit f: A => Num[A]) = Point(c.map(_ * k):_*)
   def /(k: A)(implicit f: A => Num[A]) = Point(c.map(_ / k):_*)
   def dist(p: Point[A])(implicit f: A => Num[A]) = Vector(this, p).mod // distance to another Point
-  override def toString = c.mkString("(",",",")")
+  override def toString = c.mkString("(", "," ,")")
 }
 

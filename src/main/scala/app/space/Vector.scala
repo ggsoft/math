@@ -13,9 +13,9 @@ class Vector[A](override val c: A*)(implicit f: A => Num[A]) extends Point[A](c:
   def x(s: Vector[A]*)(implicit f: A => Num[A]): Vector[A] = { // generalization of vector product
     if (n < 3) throw new Exception("Dimension should be > 2")
     if (s.size != n-2) throw new Exception(s"Seq of ${n-2} vectors expected")
-    val a = Seq(this.c,this.c) ++ s.map(_.c)
+    val a = Seq(this.c, this.c) ++ s.map(_.c)
     val qm = QMatrix(a)
-    val c = a.head.indices.map(j => qm.sign(j)*det(qm.minor(0,j)))
+    val c = a.head.indices.map(j => qm.sign(j) * det(qm.minor(0, j)))
     Vector(c:_*)
   }
 }
