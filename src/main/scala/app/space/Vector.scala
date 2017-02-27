@@ -16,8 +16,7 @@ class Vector[A](override val c: A*)(implicit f: A => Num[A]) extends Point[A](c:
     val a = Seq(this.c,this.c) ++ s.map(_.c)
     val qm = QMatrix(a)
     val one = a(0)(0).one
-    def sign(k: Int) = if (k%2==0) one else -one
-    val c = a.head.indices.map(j => sign(j)*det(qm.minor(0,j)))
+    val c = a.head.indices.map(j => qm.sign(j)*det(qm.minor(0,j)))
     Vector(c:_*)
   }
 }
