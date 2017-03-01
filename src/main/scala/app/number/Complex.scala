@@ -11,9 +11,9 @@ case class Complex[A](x: A, y: A)(implicit f: A => Number[A]) {
   def -(z: Complex[A]) = Complex(x - z.x, y - z.y)
   def *(z: Complex[A]) = Complex(x*z.x - y*z.y, x*z.y + y*z.x)
   def /(z: Complex[A]) = this * z.inv
-  def ^(n: Int): Complex[A] = { // power
-    if (n > 0) this * (^(n-1))
-    else if (n < 0) Complex(x.one, x.zero) / (^(-n))
+  def pow(n: Int): Complex[A] = { // power
+    if (n > 0) this * (pow(n-1))
+    else if (n < 0) Complex(x.one, x.zero) / (pow(-n))
     else Complex(x.one, x.zero)
   }
   override def toString = {
