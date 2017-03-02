@@ -15,7 +15,7 @@ class Matrix[A](val a: Seq[Seq[A]]) extends  Table[A] {
   if (a.exists(_.size != cols)) throw new Exception("Not rectangular matrix is not allowed")
 
   def addOk(m: Matrix[A]) = (rows == m.rows) && (cols == m.cols)
-  def multOk(m: Matrix[A]) = (rows == m.cols) && (cols == m.rows)
+  def multOk(m: Matrix[A]) = cols == m.rows
 
   def +(m: Matrix[A])(implicit f: A => Num[A]) = {
     if (addOk(m)) {
@@ -57,7 +57,7 @@ class QMatrix[A](override val a: Seq[Seq[A]]) extends Matrix[A](a) { // square m
     QMatrix(drop(a, i).map(b => drop(b, j)))
   }
 
-  def inverse(implicit f: A => Num[A]) = {
+  def inverse(implicit f: A => Num[A]) = { // inverse matrix
     val d = det(this)
     if (d == a(0)(0).zero) throw new Exception("Inverse matrix does not exist")
     QMatrix(a.indices.map(i => a(i).indices.map(j => sign(i+j) * det(minor(i,j))))).tr / d
