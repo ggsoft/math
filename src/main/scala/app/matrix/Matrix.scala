@@ -51,9 +51,16 @@ object Matrix {
 class QMatrix[A](override val a: Seq[Seq[A]]) extends Matrix[A](a) { // square matrix
   val n = rows
   if (rows != cols) throw new Exception("Square matrix must have rows = cols")
+
   def minor(i: Int, j: Int) = {
     def drop[T](a: Seq[T], i: Int) = a.indices.filter(_ != i).map(k => a(k))
     QMatrix(drop(a, i).map(b => drop(b, j)))
+  }
+
+  def inverse(implicit f: A => Num[A]) = {
+    val d = det(this)
+    if (d == a(0)(0).zero) throw new Exception("Inverse matrix does not exist")
+    QMatrix(a.indices.map(i => a(i).indices.map(j => sign(i+j) * det(minor(i,j))))).tr / d
   }
 
   def sign(k: Int)(implicit f: A => Num[A]) = if (k%2==0) a(0)(0).one else -a(0)(0).one
