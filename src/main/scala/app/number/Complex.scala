@@ -1,6 +1,8 @@
 package app.number
 
-case class Complex[A](x: A, y: A)(implicit f: A => Number[A]) {
+import app.number.{Number => Num}
+
+case class Complex[A <% Num[A]](x: A, y: A) {
   private val d = x*x + y*y
   val mod = d.sqrt
   def unary_~ = Complex(x, -y)
@@ -32,5 +34,5 @@ case class Complex[A](x: A, y: A)(implicit f: A => Number[A]) {
 
 object Complex {
   import scala.language.implicitConversions
-  implicit def toComplex[A](a: A)(implicit f: A => Number[A]) = Complex(a, a.zero)
+  implicit def toComplex[A <% Num[A]](a: A) = Complex(a, a.zero)
 }
