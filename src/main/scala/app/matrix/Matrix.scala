@@ -52,9 +52,23 @@ class QMatrix[A <% Num[A]](override val a: Seq[Seq[A]]) extends Matrix[A](a) { /
   val n = rows
   if (rows != cols) throw new Exception("Square matrix must have rows = cols")
 
+  def one =
+    QMatrix(
+      for (i <- 0 to n - 1) yield
+        for(j <- 0 to n - 1) yield if (i == j) a(0)(0).one else a(0)(0).zero
+    )
+
+
   def minor(i: Int, j: Int) = {
     def drop[T](a: Seq[T], i: Int) = a.indices.filter(_ != i).map(k => a(k))
     QMatrix(drop(a, i).map(b => drop(b, j)))
+  }
+
+  def pow(n: Int): QMatrix[A] = { // power of the square matrix
+    def pw(k: Int): Matrix[A] = if (k > 1) this ** pow(n-1) else this
+    if (n < 0) throw new Exception("Power of matrix < 0")
+    else if (n == 0) one
+    else QMatrix(pw(n).a)
   }
 
   def inverse = { // inverse matrix

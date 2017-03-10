@@ -72,5 +72,17 @@ object Main {
     println("Mixed product = "+mix(v7,v8,v9))
     println("Volume of parallelepiped = "+volume(v7,v8,v9))
     println(div)
+    val b: Seq[Seq[BigDecimal]] = Seq(Seq(1,-2),Seq(3,-4))
+    val qmb = QMatrix(b)
+    println(qmb+"\n")
+    println("Power 100 = \n"+qmb.pow(100))
+    println("Inverse matrix = \n"+qmb.inverse)
+    println(div)
+    val c: Seq[Seq[BigDecimal]] = Seq(Seq(1, 1),Seq(0, 1))
+    val qmc = QMatrix(c)
+    println(qmc+"\n")
+    println("Power 100 = \n"+qmc.pow(100))
+    println("Inverse matrix = \n"+qmc.inverse)
+    println(div)
   }
 }

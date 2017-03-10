@@ -56,6 +56,8 @@ object Number {
     override def toString = a.toString
   }
 
+  private val accuracy = 80 // Number of digits in fractional part
+
   def sqrt(a: BigDecimal, scale: Int = 0): BigDecimal = {
 
     def sqrt(a: BigInt): BigInt = { // find b: BigInt => b^2 <= a < (b + 1)^2
@@ -85,7 +87,7 @@ object Number {
     val sc = math.max(a.scale, scale)
     if (sc == 0) {
       val x = sqrt(a.toBigInt)
-      if (x*x == a) BigDecimal(x) else result(50)
+      if (x*x == a) BigDecimal(x) else result(accuracy)
     } else result(sc)
   }
 
