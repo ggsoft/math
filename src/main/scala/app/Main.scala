@@ -92,7 +92,9 @@ object Main {
     val aa: Seq[Seq[BigDecimal]] =  Seq(Seq(2,3,-1),Seq(1,-2,1),Seq(1,0,2))
     val mm = QMatrix(aa)
     val vv = Vector[BigDecimal](9,3,2)
-    println("Solution: "+System(mm,vv).cramer)
+    val ss = System(mm,vv)
+    println("Cramer's rule solution: "+ss.cramer)
+    println("Inverse matrix solution: "+ss.matrix)
     println(div)
   }
 }

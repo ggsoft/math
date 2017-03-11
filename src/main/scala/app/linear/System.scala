@@ -17,6 +17,7 @@ v = Vector(c,f)
 class System[A <% Num[A]](val m: QMatrix[A], val v: Vector[A]) {
   if (m.n != v.n) throw new Exception("Data mismatch")
   lazy val md = det(m) // main determinant
+  val zero = v.c(0).zero
 
   def cramer: Vector[A] = { // Cramer’s rule
     def ins(k: Int): QMatrix[A] = {
@@ -25,11 +26,16 @@ class System[A <% Num[A]](val m: QMatrix[A], val v: Vector[A]) {
     }
 
     val dd = (0 to m.n - 1).map(k => det(ins(k)))
-    val zero = v.c(0).zero
+
     val allZero = dd.forall(_ == zero) && (md == zero)
     if (allZero) throw new Exception("The system is undefined (infinite set of solutions)")
     else if (md == zero) throw new Exception("The system has no solutions")
     else Vector(dd.map(_/md):_*)
+  }
+
+  def matrix: Vector[A] = {  // Inverse matrix solution
+    if (md == zero) throw new Exception("Inverse matrix does not exist")
+    Vector((m.inverse ** Matrix(Seq(v.c)).tr).tr.a(0):_*)
   }
 }
 
