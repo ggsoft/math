@@ -1,0 +1,38 @@
+package app.linear
+
+import app.matrix._
+import app.space.Vector
+import app.number.{Number => Num}
+
+/*
+Solving systems of linear equations
+
+ax + by = c
+dx + ey = f
+
+m = QMatrix(Seq(Seq(a,b),Seq(d,e)))
+v = Vector(c,f)
+*/
+
+class System[A <% Num[A]](val m: QMatrix[A], val v: Vector[A]) {
+  if (m.n != v.n) throw new Exception("Data mismatch")
+  lazy val md = det(m) // main determinant
+
+  def cramer: Vector[A] = { // Cramer’s rule
+    def ins(k: Int): QMatrix[A] = {
+      val a = m.tr.a
+      QMatrix(Matrix(a.indices.map(j => if (j == k) v.c else a(j))).tr.a)
+    }
+
+    val dd = (0 to m.n - 1).map(k => det(ins(k)))
+    val zero = v.c(0).zero
+    val allZero = dd.forall(_ == zero) && (md == zero)
+    if (allZero) throw new Exception("The system is undefined (infinite set of solutions)")
+    else if (md == zero) throw new Exception("The system has no solutions")
+    else Vector(dd.map(_/md):_*)
+  }
+}
+
+object System {
+  def apply[A <% Num[A]](m: QMatrix[A], v: Vector[A]) = new System(m, v)
+}

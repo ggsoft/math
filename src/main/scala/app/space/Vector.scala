@@ -4,7 +4,7 @@ import app.matrix._
 import app.number.{Number => Num}
 
 class Vector[A <% Num[A]](override val c: A*) extends Point[A](c:_*) {
-  def **(v: Vector[A]) = (c zip v.c).map(x => x._1 * x._2).reduceLeft(_ + _) // scalar product
+  def **(v: Vector[A]) = (c zip v.c).map(x => x._1 * x._2).reduceLeft(_ + _) // inner product
   def ||(v: Vector[A]) = (c zip v.c).forall(x => x._1 == x._2) // is parallel
   def |-(v: Vector[A]) =  (this ** v) == 0 // is orthogonal
   val mod: A = (this ** this).sqrt // length

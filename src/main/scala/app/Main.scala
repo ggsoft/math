@@ -3,6 +3,7 @@ package app
 import app.matrix._
 import app.number._
 import app.space._
+import app.linear._
 
 object Main {
 
@@ -83,6 +84,15 @@ object Main {
     println(qmc+"\n")
     println("Power 100 = \n"+qmc.pow(100))
     println("Inverse matrix = \n"+qmc.inverse)
+    println(div)
+    println("System of linear equations:")
+    println("2x + 3y - z = 9")
+    println("x - 2y + z = 3")
+    println("x + 2z = 2")
+    val aa: Seq[Seq[BigDecimal]] =  Seq(Seq(2,3,-1),Seq(1,-2,1),Seq(1,0,2))
+    val mm = QMatrix(aa)
+    val vv = Vector[BigDecimal](9,3,2)
+    println("Solution: "+System(mm,vv).cramer)
     println(div)
   }
 }
