@@ -34,7 +34,6 @@ class System[A <% Num[A]](val m: QMatrix[A], val v: Vector[A]) {
   }
 
   def matrix: Vector[A] = {  // Inverse matrix solution
-    if (md == zero) throw new Exception("Inverse matrix does not exist")
     Vector((m.inverse ** Matrix(Seq(v.c)).tr).tr.a(0):_*)
   }
 }
