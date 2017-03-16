@@ -9,7 +9,7 @@ class Vector[A <% Num[A]](override val c: A*) extends Point[A](c:_*) {
   def |-(v: Vector[A]) =  (this ** v) == 0 // is orthogonal
   val mod: A = (this ** this).sqrt // length
   val cos: Option[Point[A]] = if (mod > c(0).zero) Some(this/mod) else None // directional cosines
-  def cos(v: Vector[A]) = (this ** v)/(this.mod*v.mod) // cosines of angle with another vector
+  def cos(v: Vector[A]) = (this ** v)/(this.mod * v.mod) // cosines of angle with another vector
   def x(s: Vector[A]*): Vector[A] = { // generalization of vector product
     if (n < 3) throw new Exception("Dimension should be > 2")
     if (s.size != n-2) throw new Exception(s"${n-2} vectors expected")

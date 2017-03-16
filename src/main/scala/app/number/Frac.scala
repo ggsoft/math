@@ -15,6 +15,13 @@ class Frac(val a: BigInt, val b: BigInt) {
   def >=(f: Frac) = a*f.b >= b*f.a
   def <(f: Frac) = a*f.b < b*f.a
   def <=(f: Frac) = a*f.b <= b*f.a
+  def unary_- = Frac(-a, b)
+  def sqrt = {
+    import app.number.{sqrt => qr}
+    val y = BigDecimal("1" + ("0" * accuracy))
+    val x = qr(toBigDecimal) * y
+    Frac(x.toBigInt, y.toBigInt).reduce
+  }
 
   def toDouble = a.toDouble/b.toDouble
   def toBigDecimal = BigDecimal(a)/BigDecimal(b)

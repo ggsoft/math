@@ -56,4 +56,40 @@ object Number {
     override def toString = a.toString
   }
 
+  implicit def numFrac(x: Frac) = new Number[Frac] {
+    override val a = x
+    override val zero = Frac.zero
+    override val one = Frac.one
+    override def +(b: Frac) = a + b
+    override def -(b: Frac) = a - b
+    override def *(b: Frac) = a * b
+    override def /(b: Frac) = a / b
+    def < (b: Frac) = a < b
+    def > (b: Frac) = a > b
+    def <= (b: Frac) = a <= b
+    def >= (b: Frac) = a >= b
+    override def sqrt = x.sqrt
+    override def unary_- = zero - a
+    override def abs = if (a < zero) -a else a
+    override def toString = a.toString
+  }
+
+  implicit def numComplex(x: Complex) = new Number[Complex] {
+    override val a = x
+    override val zero = Complex.zero
+    override val one = Complex.one
+    override def +(b: Complex) = a + b
+    override def -(b: Complex) = a - b
+    override def *(b: Complex) = a * b
+    override def /(b: Complex) = a / b
+    def < (b: Complex) = a.mod < b.mod
+    def > (b: Complex) = a.mod > b.mod
+    def <= (b: Complex) = a.mod <= b.mod
+    def >= (b: Complex) = a.mod >= b.mod
+    override def sqrt = app.number.sqrt(x.mod)
+    override def unary_- = zero - a
+    override def abs = a.mod
+    override def toString = a.toString
+  }
+
 }
