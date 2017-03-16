@@ -86,7 +86,7 @@ object Number {
     def > (b: Complex) = a.mod > b.mod
     def <= (b: Complex) = a.mod <= b.mod
     def >= (b: Complex) = a.mod >= b.mod
-    override def sqrt = app.number.sqrt(x.mod)
+    override def sqrt = x.sqrt
     override def unary_- = zero - a
     override def abs = a.mod
     override def toString = a.toString

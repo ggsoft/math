@@ -1,18 +1,25 @@
 package app.number
 
-case class Complex(x: BigDecimal, y: BigDecimal) {
-  private val d = x*x + y*y
-  val mod = sqrt(d)
+case class Complex(a: BigDecimal, b: BigDecimal) {
+  private val d = a*a + b*b
+  val mod = app.number.sqrt(d)
   val zero = Complex.zero
   val one = Complex.one
-  def unary_~ = Complex(x, -y)
-  def unary_- = Complex(-x, -y)
+  def unary_~ = Complex(a, -b)
+  def unary_- = Complex(-a, -b)
   def unary_+ = this
-  def inv = ~Complex(x/d, y/d) // inverse number
-  def +(z: Complex) = Complex(x + z.x, y + z.y)
-  def -(z: Complex) = Complex(x - z.x, y - z.y)
-  def *(z: Complex) = Complex(x*z.x - y*z.y, x*z.y + y*z.x)
+  def inv = ~Complex(a/d, b/d) // inverse number
+  def +(z: Complex) = Complex(a + z.a, b + z.b)
+  def -(z: Complex) = Complex(a - z.a, b - z.b)
+  def *(z: Complex) = Complex(a*z.a - b*z.b, a*z.b + b*z.a)
   def /(z: Complex) = this * z.inv
+
+  def sqrt = {
+    import app.number.{sqrt => qr}
+    val x = qr((mod + a) / 2)
+    val y = b / (x * 2)
+    Complex(x, y)
+  }
 
   def pow(n: Int): Complex = { // power
     if (n > 0) this * (pow(n-1))
@@ -21,15 +28,15 @@ case class Complex(x: BigDecimal, y: BigDecimal) {
   }
 
   override def toString = {
-    if ((x == zero) && (y == zero)) "0"
-    else if ((x == zero) && (y == one)) "i"
-    else if ((x == zero) && (y == -one)) "-i"
-    else if (y == zero) x.toString
-    else if (x == zero) y.toString + "*i"
+    if ((a == zero) && (b == zero)) "0"
+    else if ((a == zero) && (b == one)) "i"
+    else if ((a == zero) && (b == -one)) "-i"
+    else if (b == zero) a.toString
+    else if (a == zero) b.toString + "*i"
     else {
-      val a = x.toString
-      val b = y.abs.toString
-      a + " " + (if (y < zero) "-" else "+") + " " + (if (b == "1") "i" else  b + "*i")
+      val x = a.toString
+      val y = b.abs.toString
+      x + " " + (if (b < zero) "-" else "+") + " " + (if (y == "1") "i" else  y + "*i")
     }
   }
 }
