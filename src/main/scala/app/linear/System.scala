@@ -1,7 +1,7 @@
 package app.linear
 
 import app.matrix._
-import app.space.Vector
+import app.space.{Plane, Vector}
 import app.number.{Number => Num}
 
 /*
@@ -36,6 +36,8 @@ class System[A <% Num[A]](val m: QMatrix[A], val v: Vector[A]) {
   def matrix: Vector[A] = {  // Inverse matrix solution
     Vector((m.inverse ** Matrix(Seq(v.c)).tr).tr.a(0):_*)
   }
+
+  override def toString = (m.a zip v.c).map(p => Plane.left(Vector(p._1:_*)) + " = " + p._2).mkString("\n")
 }
 
 object System {

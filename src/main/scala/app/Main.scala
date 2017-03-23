@@ -93,8 +93,17 @@ object Main {
     val mm = QMatrix(aa)
     val vv = Vector[BigDecimal](9,3,2)
     val ss = System(mm,vv)
+    println("Text view: \n" + ss)
     println("Cramer's rule solution: "+ss.cramer)
     println("Inverse matrix solution: "+ss.matrix)
+    println(div)
+    println("Fractional coefficients example:")
+    val aa1: Seq[Seq[Frac]] =  Seq(Seq(Frac(2,3),Frac(3,5)),Seq(Frac(1,9),Frac(2,15)))
+    val mm1 = QMatrix(aa1)
+    val vv1 = Vector[Frac](5,1)
+    val ss1 = System(mm1,vv1)
+    println(ss1)
+    println("Solution: "+ss1.cramer)
     println(div)
   }
 }

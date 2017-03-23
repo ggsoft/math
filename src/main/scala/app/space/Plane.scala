@@ -11,5 +11,11 @@ case class Plane[A <% Num[A]](a: Point[A], val v: Vector[A]) { // hyperplane in 
   // is points p1 and p2 are in different half-spaces
   def diff(p1: Point[A], p2: Point[A]) = (v ** Vector(p1) - d) * (v ** Vector(p2) - d) < p1.c(0).zero
   def dist(p: Point[A]) = (v ** Vector(p) - d).abs/v.mod // distance from point to the plane
-  override def toString = v.toString + " = " + d.toString
+  override def toString = {
+    Plane.left(v) + " = " + d.toString
+  }
+}
+
+object Plane {
+  def left[A](v: Vector[A]) = (v.c zip v.c.indices.map(_ + 1)).map(p => "(" + p._1 + ")*X" + p._2).mkString(" + ")
 }
