@@ -3,7 +3,7 @@ package app.number
 class Frac(val a: BigInt, val b: BigInt) {
   def reduce = {
     val d = a gcd b
-    if (d > 0) Frac(a/d, b/d) else this
+    if (d > 1) Frac(a/d, b/d) else this
   }
   def +(f: Frac) = Frac(a*f.b+b*f.a, b*f.b).reduce
   def -(f: Frac) = Frac(a*f.b-b*f.a, b*f.b).reduce
