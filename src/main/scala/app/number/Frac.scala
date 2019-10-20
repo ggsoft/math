@@ -16,6 +16,7 @@ class Frac(val a: BigInt, val b: BigInt) {
   def <(f: Frac) = a*f.b < b*f.a
   def <=(f: Frac) = a*f.b <= b*f.a
   def unary_- = Frac(-a, b)
+  def abs = if (this < Frac.zero) -this else this
   def sqrt = {
     import app.number.{sqrt => qr}
     val y = BigDecimal("1" + ("0" * accuracy))

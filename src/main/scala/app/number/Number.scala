@@ -34,7 +34,7 @@ object Number {
     override def >= (b: Double) = a >= b
     override def sqrt =  math.sqrt(a)
     override def unary_- = zero - a
-    override def abs = if (a < zero) -a else a
+    override def abs = math.abs(a)
     override def toString = a.toString
   }
 
@@ -52,7 +52,7 @@ object Number {
     def >= (b: BigDecimal) = a >= b
     override def sqrt = app.number.sqrt(a)
     override def unary_- = zero - a
-    override def abs = if (a < zero) -a else a
+    override def abs = a.abs
     override def toString = a.toString
   }
 
@@ -70,7 +70,7 @@ object Number {
     def >= (b: Frac) = a >= b
     override def sqrt = x.sqrt
     override def unary_- = zero - a
-    override def abs = if (a < zero) -a else a
+    override def abs = a.abs
     override def toString = a.toString
   }
 
